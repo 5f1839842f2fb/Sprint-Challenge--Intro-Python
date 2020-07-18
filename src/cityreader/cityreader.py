@@ -38,8 +38,8 @@ def cityreader(cities=[]):
 cityreader(cities)
 
 # Print the list of cities (name, lat, lon), 1 record per line.
-for c in cities:
-    print(c.name, c.lat, c.lon)
+""" for c in cities:
+    print(c.name, c.lat, c.lon) """
 
 # STRETCH GOAL!
 #
@@ -75,8 +75,30 @@ for c in cities:
 def cityreader_stretch(lat1, lon1, lat2, lon2, cities=[]):
   # within will hold the cities that fall within the specified region
   within = []
-  
+
+  if lat1 > lat2:
+    temp = lat1
+    lat1 = lat2
+    lat2 = temp
+
+  if lon1 > lon2:
+    temp = lon1
+    lon1 = lon2
+    lon2 = temp
+
+  for e in cities:
+    if lat1 <= e.lat <= lat2 and lon1 <= e.lon <= lon2:
+      within.append(e)
+      
   # Go through each city and check to see if it falls within 
   # the specified coordinates.
 
   return within
+
+within = cityreader_stretch(40, -100, 30, -120, cities)
+
+print([(e.name, e.lat, e.lon) for e in within])
+
+within = cityreader_stretch(30, -120, 40, -100, cities)
+
+print([(e.name, e.lat, e.lon) for e in within])
